@@ -1,0 +1,10 @@
+streamlit
+numpy
+streamlit-drawable-canvas
+gdown
+tensorflow
+joblib
+pandas
+lightgbm
+pillow
+scikit-learn
