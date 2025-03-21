@@ -8,3 +8,4 @@ pandas
 lightgbm
 pillow
 scikit-learn
+requests
