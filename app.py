@@ -4,7 +4,7 @@ from streamlit_drawable_canvas import st_canvas
 import numpy as np
 from PIL import Image
 import os
-
+import requests
 # Lägg till anpassad CSS-stil för förbättrad färg och design
 st.markdown("""
     <style>
@@ -44,12 +44,23 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Försök att ladda modellen från den lokala filvägen
+
+
 try:
-    model_path = r'C:\Users\Player1\Desktop\EC Utbildning\Machine_Learning\kunskapskontroll_2_ml_ds24\my_trained_model.h5'
+    model_url = "https://github.com/siffror/Handwritten-Digit-Recognition-with-CNN-and-Calculator/raw/main/my_trained_model.h5"
+    model_path = "my_trained_model.h5"
+
+    # Ladda ner modellen om den inte finns lokalt (för att undvika att ladda ner varje gång)
+    if not os.path.exists(model_path):
+        with open(model_path, "wb") as f:
+            response = requests.get(model_url)
+            f.write(response.content)
+
     model = load_model(model_path)
     st.write("Modellen har laddats framgångsrikt.")
 except Exception as e:
     st.write(f"Det gick inte att ladda modellen: {e}")
+
 
 # Titeln på appen
 st.markdown('<h1 class="title">Handskriven Sifferigenkänning med CNN och Kalkylator</h1>', unsafe_allow_html=True)
